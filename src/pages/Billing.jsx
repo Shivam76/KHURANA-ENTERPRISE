@@ -9,7 +9,7 @@ import './Billing.css'
 function Billing() {
   const { data: stockData } = useFetch('/stock')
 
-  const [activeTab, setActiveTab] = useState('create') // 'create' | 'history'
+  const [activeTab, setActiveTab] = useState('create') // 'create' | 'histor12y'
   const [billsFilter, setBillsFilter] = useState('today')
   const [bills, setBills] = useState(null)
   const [billsLoading, setBillsLoading] = useState(false)
