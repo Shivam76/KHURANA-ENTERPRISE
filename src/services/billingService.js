@@ -1,4 +1,6 @@
-// Billing API calls — backend at /bill (proxied to http://localhost:8087)
+import { getApiUrl } from '../config/api'
+
+// Billing API calls — backend at /bill
 
 const handleResponse = async (response) => {
   if (!response.ok) {
@@ -20,7 +22,7 @@ export const createBill = async ({ shopName, gst, customerGstNumber = '', skipSt
     qty: Number(p.qty ?? p.quantity ?? 1),
   }))
 
-  const response = await fetch(`/bill?${params}`, {
+  const response = await fetch(getApiUrl(`/bill?${params}`), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -32,29 +34,29 @@ export const createBill = async ({ shopName, gst, customerGstNumber = '', skipSt
 }
 
 export const getTodayBills = async () => {
-  return handleResponse(await fetch('/bill/today'))
+  return handleResponse(await fetch(getApiUrl('/bill/today')))
 }
 
 export const getYesterdayBills = async () => {
-  return handleResponse(await fetch('/bill/yesterday'))
+  return handleResponse(await fetch(getApiUrl('/bill/yesterday')))
 }
 
 export const getWeekBills = async () => {
-  return handleResponse(await fetch('/bill/week'))
+  return handleResponse(await fetch(getApiUrl('/bill/week')))
 }
 
 export const getMonthBills = async () => {
-  return handleResponse(await fetch('/bill/month'))
+  return handleResponse(await fetch(getApiUrl('/bill/month')))
 }
 
 export const getBillsByMonthYear = async (month, year) => {
-  return handleResponse(await fetch(`/bill/month/${month}/year/${year}`))
+  return handleResponse(await fetch(getApiUrl(`/bill/month/${month}/year/${year}`)))
 }
 
 export const getBillsByYear = async (year) => {
-  return handleResponse(await fetch(`/bill/year/${year}`))
+  return handleResponse(await fetch(getApiUrl(`/bill/year/${year}`)))
 }
 
 export const getBillsByShop = async (shopName) => {
-  return handleResponse(await fetch(`/bill/shop/${encodeURIComponent(shopName)}`))
+  return handleResponse(await fetch(getApiUrl(`/bill/shop/${encodeURIComponent(shopName)}`)))
 }

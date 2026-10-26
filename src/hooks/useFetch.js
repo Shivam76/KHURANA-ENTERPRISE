@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { getApiUrl } from '../config/api'
 
 function useFetch(url, options = {}) {
   const [data, setData] = useState(null)
@@ -18,7 +19,8 @@ function useFetch(url, options = {}) {
       setError(null)
       
       try {
-        const response = await fetch(url, {
+        const targetUrl = getApiUrl(url)
+        const response = await fetch(targetUrl, {
           ...options,
           headers: {
             'Content-Type': 'application/json',
